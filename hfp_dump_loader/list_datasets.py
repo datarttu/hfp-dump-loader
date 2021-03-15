@@ -2,16 +2,17 @@
 List csv dataset URLs available in the storage.
 """
 
+import sys
 import requests
 import xmltodict
 from datetime import datetime
 
-def get_raw_dataset_xml(storage_url, maxresults, marker=None):
+def get_raw_dataset_xml(storage_url, prefix, maxresults, marker=None):
     """Download max `maxresults` entries of available datasets from `hfp_storage_url` and return raw XML result.
     If `marker` string is provided, it is used to return data after NextMarker.
     For now, this is hard-coded to get VehiclePosition metadata only.
     """
-    url = f'{storage_url}?restype=container&comp=list&prefix=csv/VehiclePosition&maxresults={maxresults}'
+    url = f'{storage_url}?restype=container&comp=list&prefix={prefix}&maxresults={maxresults}'
     if marker is not None:
         url = f'{url}&marker={marker}'
     r = requests.get(url)
@@ -59,13 +60,13 @@ def human_readable_dataset_string(blob_dict):
     human_readable_size = sizeof_fmt(int(blob_dict['size_bytes']))
     return f"{blob_dict['dataset_name']:<50} {human_readable_size:<20}"
 
-def browse_datasets_interactively(storage_url, n):
+def browse_datasets_interactively(storage_url, prefix, n):
     """End-user app for fetching and printing available dataset metadata to the console
     `n` entries at a time."""
     marker = None
     while True:
         print('Downloading...', end='\r')
-        res = get_raw_dataset_xml(storage_url=storage_url, maxresults=n, marker=marker)
+        res = get_raw_dataset_xml(storage_url=storage_url, prefix=prefix, maxresults=n, marker=marker)
         res = make_tidy_result_set(res)
         printable_lines = list(map(human_readable_dataset_string, res['blobs']))
         for l in printable_lines:

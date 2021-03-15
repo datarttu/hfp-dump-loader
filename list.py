@@ -7,11 +7,12 @@ def main(args):
 
     conf = cf.read_configuration_file(yaml_path=args.config)
     storage_url = conf['storage_url']
+    prefix = conf['prefix']
 
     if args.csv:
         pass
     else:
-        ld.browse_datasets_interactively(storage_url=storage_url, n=args.n)
+        ld.browse_datasets_interactively(storage_url=storage_url, prefix=prefix, n=args.n)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='List and download HFP datasets')
