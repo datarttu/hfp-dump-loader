@@ -4,13 +4,14 @@ from hfp_dump_loader import configuration as cf
 
 def main(args):
     assert args.n > 0, '--n must be greater than 0'
+    assert args.until is None or args.until > args.n, '--until must be greater than --n'
 
     conf = cf.read_configuration_file(yaml_path=args.config)
     storage_url = conf['storage_url']
     prefix = conf['prefix']
 
     if args.csv:
-        pass
+        ld.print_datasets_as_csv(storage_url=storage_url, prefix=prefix, n=args.n, until_n=args.until)
     else:
         ld.browse_datasets_interactively(storage_url=storage_url, prefix=prefix, n=args.n)
 
@@ -24,6 +25,11 @@ if __name__ == '__main__':
                         default=10,
                         metavar='<max n of lines>',
                         help='Max N of results to download at a time (defaults to 10)')
+    parser.add_argument('--until',
+                        type=int,
+                        default=9999999,
+                        metavar='<max n of lines>',
+                        help='Max N of lines to print as csv (defaults to 9999999)')
     parser.add_argument('--config',
                         default='config.yml',
                         metavar='<yaml config file>',

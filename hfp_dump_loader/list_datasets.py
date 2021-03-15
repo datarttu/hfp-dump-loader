@@ -3,6 +3,7 @@ List csv dataset URLs available in the storage.
 """
 
 import sys
+import csv
 import requests
 import xmltodict
 from datetime import datetime
@@ -83,3 +84,23 @@ def browse_datasets_interactively(storage_url, prefix, n):
                 n = int(user_input)
             except ValueError:
                 break
+
+def print_datasets_as_csv(storage_url, prefix, n, until_n):
+    """End-user app that prints dataset metadata as plain csv to stdout."""
+    csv_fields = ['dataset_name', 'dataset_url', 'last_modified', 'size_bytes']
+    writer = csv.DictWriter(sys.stdout, fieldnames=csv_fields)
+    writer.writeheader()
+
+    marker = None
+    n_written = 0
+    while True:
+        res = get_raw_dataset_xml(storage_url=storage_url, prefix=prefix, maxresults=n, marker=marker)
+        res = make_tidy_result_set(res)
+        for el in res['blobs']:
+            writer.writerow(el)
+            n_written += 1
+            if n_written >= until_n:
+                break
+        marker = res['nextmarker']
+        if marker is None or n_written >= until_n:
+            break
