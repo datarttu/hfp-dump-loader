@@ -1,0 +1,59 @@
+# An example config file for list.py and download.py.
+# Save the actual file as config.yml.
+storage_url: <STORAGE URL HERE>
+field_mapping:
+  # This is the full mapping of the assumed HFP fields and their respective
+  # column indices (0-based!) in the csv files.
+  # Tailor your output csv fields by only including the fields you want
+  # putting them here in the order you want the fields in the output files,
+  # and naming the fields as you want,
+  # just make sure you refer to correct indices in the original csv.
+  0: acc
+  1: desi
+  2: dir
+  3: direction_id
+  4: dl
+  5: dr_type
+  6: drst
+  7: event_type
+  8: geohash_level
+  9: hdg
+  10: headsign
+  11: is_ongoing
+  12: journey_start_time
+  13: journey_type
+  14: jrn
+  15: lat
+  16: line
+  17: loc
+  18: long
+  19: mode
+  20: next_stop_id
+  21: occu
+  22: oday
+  23: odo
+  24: oper
+  25: owner_operator_id
+  26: received_at
+  27: route_id
+  28: route
+  29: seq
+  30: spd
+  31: start
+  32: stop
+  33: topic_latitude
+  34: topic_longitude
+  35: topic_prefix
+  36: topic_version
+  37: tsi
+  38: tst
+  39: unique_vehicle_id
+  40: uuid
+  41: veh
+  42: vehicle_number
+  43: version
+target_dir: <TARGET DIRECTORY OF THE CSV OUTPUT FILES HERE>
+# The csv lines are automatically distributed into csv files named by this template.
+# You can use field names (that you've included in your result files above)
+# as variables with $ prefix.
+csvname_template: hfp_$route_$dir_$oday.csv
