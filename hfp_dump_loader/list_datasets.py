@@ -12,10 +12,13 @@ def get_raw_dataset_xml(storage_url, prefix, maxresults, marker=None):
     If `marker` string is provided, it is used to return data after NextMarker.
     For now, this is hard-coded to get VehiclePosition metadata only.
     """
-    url = f'{storage_url}?restype=container&comp=list&prefix={prefix}&maxresults={maxresults}'
-    if marker is not None:
-        url = f'{url}&marker={marker}'
-    r = requests.get(url)
+    r = requests.get(storage_url, params={
+                         'restype': 'container',
+                         'comp': 'list',
+                         'prefix': prefix,
+                         'maxresults': maxresults,
+                         'marker': marker
+                     })
     return r.text
 
 def pick_blob_attributes(blob):
