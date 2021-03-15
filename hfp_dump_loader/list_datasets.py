@@ -71,5 +71,11 @@ def browse_datasets_interactively(storage_url, n):
         for l in printable_lines:
             print(l)
         marker = res['nextmarker']
-        if marker is None or input('ENTER (type anything to quit) ') != '':
+        if marker is None:
             break
+        user_input = input('ENTER to continue, type a number for new n of lines, or type anything else to quit: ')
+        if user_input != '':
+            try:
+                n = int(user_input)
+            except ValueError:
+                break
