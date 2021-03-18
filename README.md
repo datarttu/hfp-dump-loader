@@ -58,8 +58,8 @@ python list.py --csv --n 1000 > datasets.csv
 
 Run `python list.py --help` for more help.
 
-*For the time being, `csv/VehiclePosition` is hard-coded in the app, but choosing different datasets might be supported later if needed.
-Filtering by date range would also be useful, but unfortunately the Azure Blob Storage API does not have a method for that (other than filtering by filename prefix), so in most cases fetching the complete list would be necessary anyway.*
+- *`csv/VehiclePosition` is set in the YAML configuration, there are some other dataset types as well.*
+- *Filtering by date range would also be useful, but unfortunately the Azure Blob Storage API does not have a method for that (other than filtering by filename prefix), so in most cases fetching the complete list would be necessary anyway.*
 
 ### Download a dataset
 
