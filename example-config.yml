@@ -2,6 +2,7 @@
 # Save the actual file as config.yml.
 storage_url: <STORAGE URL HERE>
 prefix: csv/VehiclePosition
+expected_n_fields: 44
 field_mapping:
   # This is the full mapping of the assumed HFP fields and their respective
   # column indices (0-based!) in the csv files.
