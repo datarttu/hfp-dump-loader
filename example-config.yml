@@ -10,9 +10,13 @@ field_mapping:
   # putting them here in the order you want the fields in the output files,
   # and naming the fields as you want,
   # just make sure you refer to correct indices in the original csv.
-  # If an entry only contains index: name, then it is left as string.
-  # Otherwise, name and target type must be defined separately.
-  # Possible target types are int, float, timestamp and date.
+  #
+  # Result rows can be filtered by attribute value by providing a list of keep_values.
+  # If an entry only contains index: name, then it is left as string
+  # and results are not filtered by its values.
+  #
+  # Otherwise, name, target type and possible keep_values must be defined separately.
+  # Possible target types are str (default), int, float, timestamp and date.
   0:
     name: acc
     type: float
@@ -20,6 +24,7 @@ field_mapping:
   2:
     name: dir
     type: int
+    keep_values: [1, 2]
   3:
     name: direction_id
   4:

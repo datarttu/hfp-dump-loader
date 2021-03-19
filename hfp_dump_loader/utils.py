@@ -19,6 +19,7 @@ def milliseconds_to_date(x):
 
 # Available type cast names for config.yml and their respective functions.
 TYPE_CASTS = {
+    'str': str,
     'int': str_float_to_int,
     'float': float,
     'timestamp': milliseconds_to_timestamp,
