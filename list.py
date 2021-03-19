@@ -6,7 +6,7 @@ def main(args):
     assert args.n > 0, '--n must be greater than 0'
     assert args.until is None or args.until > args.n, '--until must be greater than --n'
 
-    conf = cf.read_configuration_file(yaml_path=args.config)
+    conf = cf.read_conf_for_listing(yaml_path=args.config)
     storage_url = conf['storage_url']
     prefix = conf['prefix']
 
