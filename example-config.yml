@@ -10,49 +10,99 @@ field_mapping:
   # putting them here in the order you want the fields in the output files,
   # and naming the fields as you want,
   # just make sure you refer to correct indices in the original csv.
-  0: acc
+  # If an entry only contains index: name, then it is left as string.
+  # Otherwise, name and target type must be defined separately.
+  # Possible target types are int, float, timestamp and date.
+  0:
+    name: acc
+    type: float
   1: desi
-  2: dir
-  3: direction_id
-  4: dl
+  2:
+    name: dir
+    type: int
+  3:
+    name: direction_id
+  4:
+    name: dl
+    type: float
   5: dr_type
   6: drst
   7: event_type
-  8: geohash_level
-  9: hdg
+  8:
+    name: geohash_level
+    type: float
+  9:
+    name: hdg
+    type: float
   10: headsign
   11: is_ongoing
   12: journey_start_time
   13: journey_type
-  14: jrn
-  15: lat
+  14:
+    name: jrn
+    type: int
+  15:
+    name: lat
+    type: float
   16: line
   17: loc
-  18: long
+  18:
+    name: long
+    type: float
   19: mode
-  20: next_stop_id
-  21: occu
-  22: oday
-  23: odo
-  24: oper
+  20:
+    name: next_stop_id
+    type: int
+  21:
+    name: occu
+    type: int
+  22:
+    name: oday
+    type: date
+  23:
+    name: odo
+    type: int
+  24:
+    name: oper
+    type: int
   25: owner_operator_id
-  26: received_at
+  26:
+    name: received_at
+    type: timestamp
   27: route_id
   28: route
-  29: seq
-  30: spd
+  29:
+    name: seq
+    type: int
+  30:
+    name: spd
+    type: float
   31: start
-  32: stop
-  33: topic_latitude
-  34: topic_longitude
+  32:
+    name: stop
+    type: int
+  33:
+    name: topic_latitude
+    type: float
+  34:
+    name: topic_longitude
+    type: float
   35: topic_prefix
   36: topic_version
-  37: tsi
-  38: tst
+  37:
+    name: tsi
+    type: int
+  38:
+    name: tst
+    type: timestamp
   39: unique_vehicle_id
   40: uuid
-  41: veh
-  42: vehicle_number
+  41:
+    name: veh
+    type: int
+  42:
+    name: vehicle_number
+    type: int
   43: version
 target_dir: <TARGET DIRECTORY OF THE CSV OUTPUT FILES HERE>
 # The csv lines are automatically distributed into csv files named by this template.
