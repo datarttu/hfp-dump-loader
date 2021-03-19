@@ -55,6 +55,24 @@ def transpose_to_dict_rows(cols_dict):
     """Return `cols_dict` as list of dict rows."""
     return [dict(zip(cols_dict.keys(), row)) for row in zip(*cols_dict.values())]
 
+def match_row_attributes(row_dict, filters):
+    for k, v in filters.items():
+        if row_dict[k] not in v:
+            return False
+    return True
+
+def filter_rows_by_attributes(dict_rows, field_mapping):
+    """Only return rows where attribute values are found in their corresponding
+    keep_values lists in `field_mapping`."""
+    filters = {}
+    for k, v in field_mapping.items():
+        if isinstance(v, dict) and 'keep_values' in v.keys():
+            filters[v['name']] = v['keep_values']
+    if not filters:
+        return dict_rows
+    filtered_rows = [r for r in dict_rows if match_row_attributes(r, filters)]
+    return filtered_rows
+
 def split_rows_for_files(dict_rows, csvname_template):
     """Distribute rows into lists by output filename created with `csvname_template`.
     The template should contain field names present in `dict_rows` prefixed with `$`.
