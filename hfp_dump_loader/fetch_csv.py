@@ -38,3 +38,10 @@ def get_csv_chunk(req_iterator, chunk_size):
         else:
             break
     return rows
+
+def split_fields(str_rows, expected_n_fields):
+    """Make list of comma-separated string rows into list of lists,
+    drop rows that do not have `expected_n_fields` elements."""
+    rows = [el.split(',') for el in str_rows]
+    rows = [el for el in rows if len(el) == expected_n_fields]
+    return rows
