@@ -106,6 +106,5 @@ field_mapping:
   43: version
 target_dir: <TARGET DIRECTORY OF THE CSV OUTPUT FILES HERE>
 # The csv lines are automatically distributed into csv files named by this template.
-# You can use field names (that you've included in your result files above)
-# as variables with $ prefix.
-csvname_template: hfp_$route_$dir_$oday.csv
+# Field names in curly brackets are variables, and they must be included in the field_mapping above.
+csvname_template: hfp_{route}_{dir}_{oday}.csv

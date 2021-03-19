@@ -54,3 +54,17 @@ def cast_col_types(cols_dict, field_mapping):
 def transpose_to_dict_rows(cols_dict):
     """Return `cols_dict` as list of dict rows."""
     return [dict(zip(cols_dict.keys(), row)) for row in zip(*cols_dict.values())]
+
+def split_rows_for_files(dict_rows, csvname_template):
+    """Distribute rows into lists by output filename created with `csvname_template`.
+    The template should contain field names present in `dict_rows` prefixed with `$`.
+
+    ..note: Any whitespace in filenames will be replaced with `_`."""
+    distributed = {}
+    for row in dict_rows:
+        fname = csvname_template.format(**row).replace(' ', '_').replace('"', '')
+        if fname in distributed.keys():
+            distributed[fname].append(row)
+        else:
+            distributed[fname] = [row]
+    return distributed
