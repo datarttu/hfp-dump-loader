@@ -1,3 +1,5 @@
+**NOTE: This project is not being updated anymore, since I decided to write a more feasible solution in R.**
+
 # List and download HFP dumps from blob storage
 
 This tool allows you to browse [HFP](https://digitransit.fi/en/developers/apis/4-realtime-api/vehicle-positions/) csv dumps available in Azure blob storage and download filtered versions of them.
